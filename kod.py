@@ -1,8 +1,6 @@
 import sys
 
 def szyfruj(szyfr, tekst):
-
-    szyfr = szyfry[szyfr]
     
     dic = {k[0]: k[1].lower() for k in szyfr.split('-')}
     
@@ -24,21 +22,26 @@ def spr(szyfr, tekst):
     
     return szyfruj(szyfr, szyfruj(szyfr, tekst)).lower() == tekst.lower()
 
-szyfry = {'a': 'GA-DE-RY-PO-LU-KI', 'b': 'PO-LI-TY-KA-RE-NU'}
+szyfry = {'a': 'GA-DE-RY-PO-LU-KI', 'b': 'PO-LI-TY-KA-RE-NU', 'c': None}
               
 while True:
     szyfr = input(f'''Wybierz rodzaj szyfru:
                   a: {szyfry['a']},
-                  b: {szyfry['b']}
+                  b: {szyfry['b']},
+                  c: chcę podać własną sekwencję
                   ''')
     if szyfr in szyfry.keys():
         break
     else:
-        print("Niepoprawne! Podaj 'a' lub 'b'.")
-
-
+        print("Niepoprawne! Podaj 'a' lub 'b' lub 'c'.")
+        
+if szyfr == 'c':
+        szyfr = input("Podaj swój szyfr: ")
+else:
+    szyfr = szyfry[szyfr]
 
 tekst = input("Podaj tekst do zaszyfrowania: ")
 
-#print(spr(szyfr, tekst))
+print("Zaszyfrowany tekst: ", szyfruj(szyfr, tekst))
+print("Poprawnosć podwójnego szyfrowania:", spr(szyfr, tekst))
 

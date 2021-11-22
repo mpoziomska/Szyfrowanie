@@ -22,6 +22,23 @@ def spr(szyfr, tekst):
     
     return szyfruj(szyfr, szyfruj(szyfr, tekst)).lower() == tekst.lower()
 
+def wlasny_szyfr():
+    ok = False
+    while not ok:
+        ok = True
+        szyfr = input("Podaj swój szyfr: ")
+        s = szyfr.replace('-', '')
+        if len(s) != len(set(s)):
+            print("Szyfr jest niejednoznaczny - powtarzają się litery!")
+            ok = False
+        for i in szyfr.split('-'):
+            if len(i) != 2:
+                print(i + ' - błędna sekwencja, mają być dwa znaki!')
+                ok = False
+            elif i[0] == i[1]:
+                print(i + ' - błąd, zamiana znaku na ten sam znak!')
+    return szyfr
+
 szyfry = {'a': 'GA-DE-RY-PO-LU-KI', 'b': 'PO-LI-TY-KA-RE-NU', 'c': None}
               
 while True:
@@ -36,7 +53,7 @@ while True:
         print("Niepoprawne! Podaj 'a' lub 'b' lub 'c'.")
         
 if szyfr == 'c':
-        szyfr = input("Podaj swój szyfr: ")
+    szyfr = wlasny_szyfr()   
 else:
     szyfr = szyfry[szyfr]
 
